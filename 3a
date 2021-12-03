@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+typedef struct {
+	unsigned short ngay, thang, nam, gio, phut;
+}thoi_diem;
+typedef struct
+{
+	thoi_diem n;
+	string ten_su_kien;
+	int do_quan_trong; //Mức độ quan trọng được xét theo thang từ 1 -> 4
+					   //Mức 1: không quan trọng, mức 2: có chút quan trọng
+					   //Mức 3: khá quan trọng, mức 4: rất quan trọng
+}su_kien;
+
+void SuKienQuanTrong(su_kien array[], const int& n, string lietke[], int& j)
+{
+	for (int i = 0; i < n; i++)
+		if (array[i].do_quan_trong == 3 || array[i].do_quan_trong == 4)
+		{
+			lietke[j] = array[i].ten_su_kien;
+			j++;
+		}
+}
+void Print(string lietke[], int n)
+{
+	for (int i = 0;i < n;i++)
+	{
+		cout << lietke[i] << endl;
+	}
+}
+int main()
+{
+	thoi_diem t[5] = { {12,12,2021,23,59},{11,11,2020,21,12},{27,2,2021,7,30},{31,1,2020,4,30},{31,1,2020,4,35}};
+	su_kien s[5] = { {t[1], "Que", 4},{t[2],"Nhuc",3},{t[3],"Met",2},{t[4],"Moi",1},{t[0],"Di ngu",4} };
+	string lietke[5];
+	int m=0;
+	SuKienQuanTrong(s, 5, lietke, m);
+
+	Print(lietke, m);
+	return 0;
+}
